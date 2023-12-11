@@ -1,4 +1,4 @@
-# java-mini-project
+# Java-mini-project (Réservation d'Hôtel en Ligne)
 
 **Cahier des charges pour l'Application de Réservation d'Hôtel en Ligne**
 
