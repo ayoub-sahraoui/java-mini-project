@@ -5,6 +5,5 @@ public enum Role {
     ADMIN,
     RECEPTIONIST,
     SERVER,
-
-
+    HOUSE_KEEPER,
 }

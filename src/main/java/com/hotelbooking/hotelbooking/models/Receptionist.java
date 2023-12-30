@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-
 @Entity
 @Table(name = "receptionists")
 @PrimaryKeyJoinColumn(name = "id",referencedColumnName = "id")
