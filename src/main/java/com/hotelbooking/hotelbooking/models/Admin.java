@@ -17,4 +17,7 @@ public class Admin extends User{
     public Admin() {
 
     }
+
+    public Admin(String firstName, String lastName, String email, Role role) {
+    }
 }

@@ -34,7 +34,7 @@ public class AdminController {
     }
 
     @PostMapping("/save")
-    public Admin save (@RequestBody AdminDTO request){
+    public Admin save (@RequestBody Admin request){
         return adminService.save(request);
     }
 

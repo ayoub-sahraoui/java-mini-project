@@ -18,9 +18,12 @@ public class AdminService {
     private AdminRepository adminRepository;
 
 
-    public Admin getById(int id){
+    public AdminDTO getById(int id){
         Optional<Admin> admin = this.adminRepository.findById(id);
-        return admin.orElse( null);
+        if(admin.isPresent()){
+            return AdminDTO.ToDTO(admin.get());
+        }else
+            return null;
     }
 
     public Admin findByEmail(String email){
@@ -30,7 +33,7 @@ public class AdminService {
     public List<Admin> getAll(){
         return this.adminRepository.findAll();
     }
-    public Admin save(AdminDTO request){
+    public Admin save(Admin request){
         Admin admin = new Admin(
                 request.getFirstName(),
                 request.getLastName(),

@@ -1,5 +1,6 @@
 package com.hotelbooking.hotelbooking.repositories;
 
+import com.hotelbooking.hotelbooking.DTO.AdminDTO;
 import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import org.springframework.data.jpa.repository.JpaRepository;
