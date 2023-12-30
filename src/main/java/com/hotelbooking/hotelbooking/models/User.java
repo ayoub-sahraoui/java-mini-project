@@ -1,5 +1,6 @@
 package com.hotelbooking.hotelbooking.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -27,6 +30,14 @@ public class User implements UserDetails {
     private  String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(String firstName, String lastName, String email, String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

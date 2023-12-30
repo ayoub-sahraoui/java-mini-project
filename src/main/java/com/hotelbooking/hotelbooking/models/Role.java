@@ -2,5 +2,9 @@ package com.hotelbooking.hotelbooking.models;
 
 public enum Role {
     USER,
-    ADMIN
+    ADMIN,
+    RECEPTIONIST,
+    SERVER,
+
+
 }
