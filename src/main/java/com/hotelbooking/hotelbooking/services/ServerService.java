@@ -1,10 +1,6 @@
 package com.hotelbooking.hotelbooking.services;
 
-import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
-import com.hotelbooking.hotelbooking.DTO.ServerDTO;
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
-import com.hotelbooking.hotelbooking.models.Admin;
-import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.repositories.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

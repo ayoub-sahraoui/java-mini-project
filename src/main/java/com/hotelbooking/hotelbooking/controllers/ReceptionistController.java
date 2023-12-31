@@ -1,6 +1,5 @@
 package com.hotelbooking.hotelbooking.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.services.ReceptionistService;

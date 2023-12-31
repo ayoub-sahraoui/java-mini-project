@@ -1,12 +1,8 @@
 package com.hotelbooking.hotelbooking.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.HouseKeeperDTO;
-import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
-import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.services.HouseKeeperService;
-import com.hotelbooking.hotelbooking.services.ReceptionistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
