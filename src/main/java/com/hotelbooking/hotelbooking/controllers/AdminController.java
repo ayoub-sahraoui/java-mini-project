@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
 @RequestMapping("/api/admin/")
 public class AdminController {
@@ -31,8 +33,8 @@ public class AdminController {
     }
 
     @PostMapping("/save")
-    public Admin save (@RequestBody Admin request){
-        return adminService.save(request);
+    public ResponseEntity<Admin> save (@RequestBody Admin request){
+        return new ResponseEntity<>(adminService.save(request),CREATED) ;
     }
 
     @DeleteMapping("/delete/{id}")
