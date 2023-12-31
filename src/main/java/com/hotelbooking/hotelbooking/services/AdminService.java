@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
 import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,20 @@ public class AdminService {
     private AdminRepository adminRepository;
 
 
-    public UserDTO getById(int id){
+    public UserDTO getById(int id) throws UserNotFoundException{
         Optional<Admin> admin = this.adminRepository.findById(id);
         if(admin.isPresent()){
             return UserDTO.ToDTO(admin.get());
         }else
-           return null;
+           throw new UserNotFoundException(id);
     }
 
-    public UserDTO findByEmail(String email){
+    public UserDTO findByEmail(String email) throws UserNotFoundException{
         Optional<Admin>admin = this.adminRepository.findByEmail(email);
         if(admin.isPresent()){
             return UserDTO.ToDTO(admin.get());
         }else
-            return null;
+            throw new UserNotFoundException(email);
     }
     public List<UserDTO> getAll(){
         List<Admin> list = this.adminRepository.findAll();
