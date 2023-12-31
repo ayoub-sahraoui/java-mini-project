@@ -38,6 +38,11 @@ public class AdminController {
         return new ResponseEntity<>(adminService.save(request),CREATED) ;
     }
 
+    @PutMapping("/{id}")
+    public Admin updateAdmin(@RequestBody Admin newAdmin,@PathVariable int id) throws UserNotFoundException {
+        return adminService.update(newAdmin,id);
+    }
+
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         return adminService.delete(id);

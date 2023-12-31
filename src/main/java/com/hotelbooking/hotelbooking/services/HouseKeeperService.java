@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
 import com.hotelbooking.hotelbooking.repositories.HouseKeeperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,17 @@ public class HouseKeeperService {
                 request.getRole()
         );
         return this.houseKeeperRepository.save(houseKeeper);
+    }
+
+    public HouseKeeper update(HouseKeeper newHouseKeeper, int id) throws UserNotFoundException {
+        return this.houseKeeperRepository.findById(id)
+                .map(admin -> {
+                    admin.setFirstName(newHouseKeeper.getFirstName());
+                    admin.setLastName(newHouseKeeper.getLastName());
+                    admin.setEmail(newHouseKeeper.getEmail());
+                    admin.setRole(newHouseKeeper.getRole());
+                    return houseKeeperRepository.save(admin);
+                }).orElseThrow(()->new UserNotFoundException(id));
     }
 
     public String delete(int id){

@@ -2,7 +2,9 @@ package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Receptionist;
+import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.repositories.ReceptionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,17 @@ public class ReceptionistService {
                  request.getRole()
          );
          return this.receptionistRepository.save(receptionist);
+    }
+
+    public Receptionist update(Receptionist newReceptionist, int id) throws UserNotFoundException {
+        return this.receptionistRepository.findById(id)
+                .map(admin -> {
+                    admin.setFirstName(newReceptionist.getFirstName());
+                    admin.setLastName(newReceptionist.getLastName());
+                    admin.setEmail(newReceptionist.getEmail());
+                    admin.setRole(newReceptionist.getRole());
+                    return receptionistRepository.save(admin);
+                }).orElseThrow(()->new UserNotFoundException(id));
     }
 
     public String delete(int id){

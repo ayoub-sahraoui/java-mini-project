@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
 import com.hotelbooking.hotelbooking.services.HouseKeeperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class HouseKeeperController {
     @PostMapping("/save")
     public HouseKeeper save (@RequestBody HouseKeeper request){
         return houseKeeperService.save(request);
+    }
+
+    @PutMapping("/{id}")
+    public HouseKeeper updateHouseKeeper(@RequestBody HouseKeeper newHouseKeeper, @PathVariable int id) throws UserNotFoundException {
+        return houseKeeperService.update(newHouseKeeper,id);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
+import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.services.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ServerController {
     @PostMapping("/save")
     public Server save (@RequestBody Server request){
         return serverService.save(request);
+    }
+
+    @PutMapping("/{id}")
+    public Server updateServer(@RequestBody Server newServer, @PathVariable int id) throws UserNotFoundException {
+        return serverService.update(newServer,id);
     }
 
     @DeleteMapping("/delete/{id}")

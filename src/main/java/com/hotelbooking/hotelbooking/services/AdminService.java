@@ -60,6 +60,16 @@ public class AdminService {
         return this.adminRepository.save(admin);
     }
 
+    public Admin update(Admin newAdmin, int id) throws UserNotFoundException {
+        return this.adminRepository.findById(id)
+                .map(admin -> {
+                    admin.setFirstName(newAdmin.getFirstName());
+                    admin.setLastName(newAdmin.getLastName());
+                    admin.setEmail(newAdmin.getEmail());
+                    admin.setRole(newAdmin.getRole());
+                    return adminRepository.save(admin);
+                }).orElseThrow(()->new UserNotFoundException(id));
+    }
     public String delete(int id){
         this.adminRepository.deleteById(id);
         return "Receptionist deleted";

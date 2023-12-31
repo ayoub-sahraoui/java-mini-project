@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.repositories.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,16 @@ public class ServerService {
         return this.serverRepository.save(server);
     }
 
+    public Server update(Server newServer, int id) throws UserNotFoundException {
+        return this.serverRepository.findById(id)
+                .map(admin -> {
+                    admin.setFirstName(newServer.getFirstName());
+                    admin.setLastName(newServer.getLastName());
+                    admin.setEmail(newServer.getEmail());
+                    admin.setRole(newServer.getRole());
+                    return serverRepository.save(admin);
+                }).orElseThrow(()->new UserNotFoundException(id));
+    }
     public String delete(int id){
         this.serverRepository.deleteById(id);
         return "Server deleted";
