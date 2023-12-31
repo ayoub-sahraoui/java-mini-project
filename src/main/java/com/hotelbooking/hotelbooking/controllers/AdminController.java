@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.AdminDTO;
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.services.AdminService;
@@ -29,8 +30,8 @@ public class AdminController {
     }
 
     @GetMapping("/admins")
-    public List<Admin> getAll(){
-        return adminService.getAll();
+    public ResponseEntity<List<UserDTO>> getAll(){
+        return ResponseEntity.ok(adminService.getAll());
     }
 
     @PostMapping("/save")

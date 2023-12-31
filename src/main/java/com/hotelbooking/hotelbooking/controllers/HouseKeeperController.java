@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.HouseKeeperDTO;
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.services.HouseKeeperService;
@@ -30,12 +31,12 @@ public class HouseKeeperController {
     }
 
     @GetMapping("/housekeepers")
-    public List<HouseKeeper> getAll(){
-        return houseKeeperService.getAll();
+    public ResponseEntity<List<UserDTO>> getAll(){
+        return ResponseEntity.ok(houseKeeperService.getAll());
     }
 
     @PostMapping("/save")
-    public HouseKeeper save (@RequestBody HouseKeeperDTO request){
+    public HouseKeeper save (@RequestBody HouseKeeper request){
         return houseKeeperService.save(request);
     }
 

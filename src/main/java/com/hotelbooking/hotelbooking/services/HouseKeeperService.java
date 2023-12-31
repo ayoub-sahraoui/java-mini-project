@@ -2,12 +2,15 @@ package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.HouseKeeperDTO;
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.repositories.HouseKeeperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,19 +20,39 @@ public class HouseKeeperService {
     @Autowired
     private HouseKeeperRepository houseKeeperRepository;
 
-    public HouseKeeper getById(int id){
+    public UserDTO getById(int id){
         Optional<HouseKeeper> houseKeeper = this.houseKeeperRepository.findById(id);
-        return houseKeeper.orElse( null);
+        if(houseKeeper.isPresent()){
+            return UserDTO.ToDTO(houseKeeper.get());
+        }else
+            return null;
     }
 
-    public HouseKeeper findByEmail(String email){
+    public UserDTO findByEmail(String email){
         Optional<HouseKeeper>houseKeeper = this.houseKeeperRepository.findByEmail(email);
-        return houseKeeper.orElse(null);
+        if(houseKeeper.isPresent()){
+            return UserDTO.ToDTO(houseKeeper.get());
+        }else
+            return null;
     }
-    public List<HouseKeeper> getAll(){
-        return this.houseKeeperRepository.findAll();
+    public List<UserDTO> getAll(){
+        List<HouseKeeper> list = this.houseKeeperRepository.findAll();
+        List<UserDTO>listUserDTO = new ArrayList<>();
+        if(!list.isEmpty()){
+            for (HouseKeeper houseKeeper:list) {
+                UserDTO userDTO = new UserDTO(
+                        houseKeeper.getFirstName(),
+                        houseKeeper.getLastName(),
+                        houseKeeper.getEmail(),
+                        houseKeeper.getRole()
+                );
+                listUserDTO.add(userDTO);
+            }
+            return listUserDTO;
+        }else
+            return null;
     }
-    public HouseKeeper save(HouseKeeperDTO request){
+    public HouseKeeper save(HouseKeeper request){
         HouseKeeper houseKeeper = new HouseKeeper(
                 request.getFirstName(),
                 request.getLastName(),

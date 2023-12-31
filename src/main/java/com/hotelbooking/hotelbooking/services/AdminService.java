@@ -1,14 +1,12 @@
 package com.hotelbooking.hotelbooking.services;
 
-import com.hotelbooking.hotelbooking.DTO.AdminDTO;
-import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.Admin;
-import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.repositories.AdminRepository;
-import com.hotelbooking.hotelbooking.repositories.ReceptionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,20 +16,37 @@ public class AdminService {
     private AdminRepository adminRepository;
 
 
-    public AdminDTO getById(int id){
+    public UserDTO getById(int id){
         Optional<Admin> admin = this.adminRepository.findById(id);
         if(admin.isPresent()){
-            return AdminDTO.ToDTO(admin.get());
+            return UserDTO.ToDTO(admin.get());
         }else
             return null;
     }
 
-    public Admin findByEmail(String email){
+    public UserDTO findByEmail(String email){
         Optional<Admin>admin = this.adminRepository.findByEmail(email);
-        return admin.orElse(null);
+        if(admin.isPresent()){
+            return UserDTO.ToDTO(admin.get());
+        }else
+            return null;
     }
-    public List<Admin> getAll(){
-        return this.adminRepository.findAll();
+    public List<UserDTO> getAll(){
+        List<Admin> list = this.adminRepository.findAll();
+        List<UserDTO>listUserDTO = new ArrayList<>();
+        if(!list.isEmpty()){
+            for (Admin admin:list) {
+                UserDTO userDTO = new UserDTO(
+                        admin.getFirstName(),
+                        admin.getLastName(),
+                        admin.getEmail(),
+                        admin.getRole()
+                );
+                listUserDTO.add(userDTO);
+            }
+            return listUserDTO;
+        }else
+            return null;
     }
     public Admin save(Admin request){
         Admin admin = new Admin(

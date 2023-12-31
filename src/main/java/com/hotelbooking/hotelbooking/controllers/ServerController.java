@@ -2,6 +2,7 @@ package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
 import com.hotelbooking.hotelbooking.DTO.ServerDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.services.ReceptionistService;
@@ -29,12 +30,12 @@ public class ServerController {
     }
 
     @GetMapping("/servers")
-    public List<Server> getAll(){
-        return serverService.getAll();
+    public ResponseEntity<List<UserDTO>> getAll(){
+        return ResponseEntity.ok(serverService.getAll());
     }
 
     @PostMapping("/save")
-    public Server save (@RequestBody ServerDTO request){
+    public Server save (@RequestBody Server request){
         return serverService.save(request);
     }
 

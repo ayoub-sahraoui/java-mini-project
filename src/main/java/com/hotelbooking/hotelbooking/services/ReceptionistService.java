@@ -1,6 +1,8 @@
 package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.repositories.ReceptionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +19,39 @@ public class ReceptionistService {
      private ReceptionistRepository receptionistRepository;
 
 
-     public Receptionist getById(int id){
+     public UserDTO getById(int id){
          Optional<Receptionist>receptionist = this.receptionistRepository.findById(id);
-         return receptionist.orElse( null);
+         if(receptionist.isPresent()){
+             return UserDTO.ToDTO(receptionist.get());
+         }else
+             return null;
      }
 
-     public Receptionist findByEmail(String email){
+     public UserDTO findByEmail(String email){
          Optional<Receptionist>receptionist = this.receptionistRepository.findByEmail(email);
-         return receptionist.orElse(null);
+         if(receptionist.isPresent()){
+             return UserDTO.ToDTO(receptionist.get());
+         }else
+             return null;
      }
-    public List<Receptionist>getAll(){
-         return this.receptionistRepository.findAll();
+    public List<UserDTO>getAll(){
+        List<Receptionist> list = this.receptionistRepository.findAll();
+        List<UserDTO>listUserDTO = new ArrayList<>();
+        if(!list.isEmpty()){
+            for (Receptionist receptionist:list) {
+                UserDTO userDTO = new UserDTO(
+                        receptionist.getFirstName(),
+                        receptionist.getLastName(),
+                        receptionist.getEmail(),
+                        receptionist.getRole()
+                );
+                listUserDTO.add(userDTO);
+            }
+            return listUserDTO;
+        }else
+            return null;
     }
-    public Receptionist save(ReceptionistDTO request){
+    public Receptionist save(Receptionist request){
          Receptionist receptionist = new Receptionist(
                  request.getFirstName(),
                  request.getLastName(),

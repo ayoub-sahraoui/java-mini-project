@@ -2,12 +2,15 @@ package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
 import com.hotelbooking.hotelbooking.DTO.ServerDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.models.Admin;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.repositories.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,19 +20,39 @@ public class ServerService {
     @Autowired
     private ServerRepository serverRepository;
 
-    public Server getById(int id){
+    public UserDTO getById(int id){
         Optional<Server> server = this.serverRepository.findById(id);
-        return server.orElse( null);
+        if(server.isPresent()){
+            return UserDTO.ToDTO(server.get());
+        }else
+            return null;
     }
 
-    public Server findByEmail(String email){
+    public UserDTO findByEmail(String email){
         Optional<Server>server = this.serverRepository.findByEmail(email);
-        return server.orElse(null);
+        if(server.isPresent()){
+            return UserDTO.ToDTO(server.get());
+        }else
+            return null;
     }
-    public List<Server> getAll(){
-        return this.serverRepository.findAll();
+    public List<UserDTO> getAll(){
+        List<Server> list = this.serverRepository.findAll();
+        List<UserDTO>listUserDTO = new ArrayList<>();
+        if(!list.isEmpty()){
+            for (Server server:list) {
+                UserDTO userDTO = new UserDTO(
+                        server.getFirstName(),
+                        server.getLastName(),
+                        server.getEmail(),
+                        server.getRole()
+                );
+                listUserDTO.add(userDTO);
+            }
+            return listUserDTO;
+        }else
+            return null;
     }
-    public Server save(ServerDTO request){
+    public Server save(Server request){
         Server server = new Server(
                 request.getFirstName(),
                 request.getLastName(),

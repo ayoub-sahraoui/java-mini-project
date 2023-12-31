@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.ReceptionistDTO;
+import com.hotelbooking.hotelbooking.DTO.UserDTO;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.services.ReceptionistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,12 @@ public class ReceptionistController {
     }
 
     @GetMapping("/receptionists")
-    public List<Receptionist>getAll(){
-        return receptionistService.getAll();
+    public ResponseEntity<List<UserDTO>>getAll(){
+        return ResponseEntity.ok(receptionistService.getAll());
     }
 
     @PostMapping("/save")
-    public Receptionist save (@RequestBody ReceptionistDTO request){
+    public Receptionist save (@RequestBody Receptionist request){
         return receptionistService.save(request);
     }
 
