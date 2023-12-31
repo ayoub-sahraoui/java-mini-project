@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
 import com.hotelbooking.hotelbooking.models.HouseKeeper;
 import com.hotelbooking.hotelbooking.repositories.HouseKeeperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,20 @@ public class HouseKeeperService {
     @Autowired
     private HouseKeeperRepository houseKeeperRepository;
 
-    public UserDTO getById(int id){
+    public UserDTO getById(int id) throws UserNotFoundException {
         Optional<HouseKeeper> houseKeeper = this.houseKeeperRepository.findById(id);
         if(houseKeeper.isPresent()){
             return UserDTO.ToDTO(houseKeeper.get());
         }else
-            return null;
+            throw new UserNotFoundException(id);
     }
 
-    public UserDTO findByEmail(String email){
+    public UserDTO findByEmail(String email) throws UserNotFoundException {
         Optional<HouseKeeper>houseKeeper = this.houseKeeperRepository.findByEmail(email);
         if(houseKeeper.isPresent()){
             return UserDTO.ToDTO(houseKeeper.get());
         }else
-            return null;
+            throw new UserNotFoundException(email);
     }
     public List<UserDTO> getAll(){
         List<HouseKeeper> list = this.houseKeeperRepository.findAll();

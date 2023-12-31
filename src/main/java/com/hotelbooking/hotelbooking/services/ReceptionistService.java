@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.services;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
 import com.hotelbooking.hotelbooking.models.Receptionist;
 import com.hotelbooking.hotelbooking.repositories.ReceptionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,20 @@ public class ReceptionistService {
      private ReceptionistRepository receptionistRepository;
 
 
-     public UserDTO getById(int id){
+     public UserDTO getById(int id) throws UserNotFoundException {
          Optional<Receptionist>receptionist = this.receptionistRepository.findById(id);
          if(receptionist.isPresent()){
              return UserDTO.ToDTO(receptionist.get());
          }else
-             return null;
+             throw new UserNotFoundException(id);
      }
 
-     public UserDTO findByEmail(String email){
+     public UserDTO findByEmail(String email) throws UserNotFoundException {
          Optional<Receptionist>receptionist = this.receptionistRepository.findByEmail(email);
          if(receptionist.isPresent()){
              return UserDTO.ToDTO(receptionist.get());
          }else
-             return null;
+             throw new UserNotFoundException(email);
      }
     public List<UserDTO>getAll(){
         List<Receptionist> list = this.receptionistRepository.findAll();

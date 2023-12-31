@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.controllers;
 
 import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
 import com.hotelbooking.hotelbooking.models.Server;
 import com.hotelbooking.hotelbooking.services.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ public class ServerController {
     private ServerService serverService;
 
     @GetMapping("/find/{id}")
-    public ResponseEntity getById(@PathVariable int id){
+    public ResponseEntity getById(@PathVariable int id) throws UserNotFoundException {
         return ResponseEntity.ok(serverService.getById(id));
     }
 
     @GetMapping("/find/email/{email}")
-    public ResponseEntity findByEmail(@PathVariable String email){
+    public ResponseEntity findByEmail(@PathVariable String email) throws UserNotFoundException {
         return ResponseEntity.ok(serverService.findByEmail(email));
     }
 
