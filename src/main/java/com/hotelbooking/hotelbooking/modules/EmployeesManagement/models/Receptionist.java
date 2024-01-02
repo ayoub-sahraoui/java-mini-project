@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.modules.models;
+package com.hotelbooking.hotelbooking.modules.EmployeesManagement.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

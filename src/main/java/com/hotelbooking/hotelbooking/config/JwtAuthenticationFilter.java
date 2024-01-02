@@ -1,6 +1,6 @@
 package com.hotelbooking.hotelbooking.config;
 
-import com.hotelbooking.hotelbooking.modules.services.JwtService;
+import com.hotelbooking.hotelbooking.modules.EmployeesManagement.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

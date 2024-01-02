@@ -1,6 +1,7 @@
-package com.hotelbooking.hotelbooking.modules.repositories;
+package com.hotelbooking.hotelbooking.modules.EmployeesManagement.repositories;
 
-import com.hotelbooking.hotelbooking.modules.models.Admin;
+
+import com.hotelbooking.hotelbooking.modules.EmployeesManagement.models.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

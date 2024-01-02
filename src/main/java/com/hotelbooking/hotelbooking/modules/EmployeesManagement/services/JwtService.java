@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.modules.services;
+package com.hotelbooking.hotelbooking.modules.EmployeesManagement.services;
 
 import com.hotelbooking.hotelbooking.utils.SecretKeyStringConverter;
 import io.jsonwebtoken.Claims;
