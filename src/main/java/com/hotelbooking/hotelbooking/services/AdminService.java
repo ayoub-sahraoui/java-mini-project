@@ -70,8 +70,11 @@ public class AdminService {
                     return adminRepository.save(admin);
                 }).orElseThrow(()->new UserNotFoundException(id));
     }
-    public String delete(int id){
-        this.adminRepository.deleteById(id);
-        return "Receptionist deleted";
+    public void delete(int id) throws UserNotFoundException {
+        Optional<Admin>admin = this.adminRepository.findById(id);
+        if(admin.isPresent()){
+             this.adminRepository.deleteById(id);
+        }else
+            throw new UserNotFoundException(id);
     }
 }
