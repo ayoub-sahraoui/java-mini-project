@@ -1,14 +1,13 @@
 package com.hotelbooking.hotelbooking.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.hotelbooking.hotelbooking.repositories.RoomRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -29,12 +28,17 @@ public class Room {
     private double bookingPrice;
     private boolean isSmoking;
 
-    public Room(int roomNumber, RoomStyle style, RoomStatus status, double bookingPrice, boolean isSmoking) {
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RoomKey> roomKeys = new HashSet<>();
+
+
+    public Room(int roomNumber, RoomStyle style, RoomStatus status, double bookingPrice, boolean isSmoking, Set<RoomKey> roomKeys) {
         this.roomNumber = roomNumber;
         this.style = style;
         this.status = status;
         this.bookingPrice = bookingPrice;
         this.isSmoking = isSmoking;
+        this.roomKeys = roomKeys;
     }
 
     public boolean isRoomAvailable() {
@@ -48,7 +52,4 @@ public class Room {
     public void checkOut() {
         this.status = RoomStatus.AVAILABLE;
     }
-
-
 }
-

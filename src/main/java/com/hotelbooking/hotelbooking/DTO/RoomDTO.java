@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,9 +22,10 @@ public class RoomDTO {
     private RoomStatus status;
     private double bookingPrice;
     private boolean isSmoking;
+    private Set<RoomKeyDTO> roomKeys;
 
     public static RoomDTO toDTO(Room room) {
-        return RoomDTO.builder()
+        RoomDTO roomDTO = RoomDTO.builder()
                 .id(room.getId())
                 .roomNumber(room.getRoomNumber())
                 .style(room.getStyle())
@@ -29,5 +33,14 @@ public class RoomDTO {
                 .bookingPrice(room.getBookingPrice())
                 .isSmoking(room.isSmoking())
                 .build();
+
+        if (room.getRoomKeys() != null) {
+            roomDTO.setRoomKeys(room.getRoomKeys()
+                    .stream()
+                    .map(RoomKeyDTO::toDTO)
+                    .collect(Collectors.toSet()));
+        }
+
+        return roomDTO;
     }
 }
