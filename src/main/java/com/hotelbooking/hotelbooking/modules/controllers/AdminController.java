@@ -1,17 +1,14 @@
-package com.hotelbooking.hotelbooking.controllers;
+package com.hotelbooking.hotelbooking.modules.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.UserDTO;
+
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
-import com.hotelbooking.hotelbooking.models.Admin;
-import com.hotelbooking.hotelbooking.services.AdminService;
-import com.hotelbooking.hotelbooking.utility.CustomHttpResponse;
+import com.hotelbooking.hotelbooking.modules.models.Admin;
+import com.hotelbooking.hotelbooking.modules.models.UserDTO;
+import com.hotelbooking.hotelbooking.modules.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;

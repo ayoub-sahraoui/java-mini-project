@@ -1,9 +1,10 @@
-package com.hotelbooking.hotelbooking.services;
+package com.hotelbooking.hotelbooking.modules.services;
 
-import com.hotelbooking.hotelbooking.DTO.UserDTO;
+
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
-import com.hotelbooking.hotelbooking.models.Admin;
-import com.hotelbooking.hotelbooking.repositories.AdminRepository;
+import com.hotelbooking.hotelbooking.modules.models.Admin;
+import com.hotelbooking.hotelbooking.modules.models.UserDTO;
+import com.hotelbooking.hotelbooking.modules.repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

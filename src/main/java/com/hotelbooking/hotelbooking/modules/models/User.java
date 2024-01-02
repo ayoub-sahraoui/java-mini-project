@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.models;
+package com.hotelbooking.hotelbooking.modules.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;

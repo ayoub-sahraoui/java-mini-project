@@ -1,8 +1,5 @@
-package com.hotelbooking.hotelbooking.DTO;
+package com.hotelbooking.hotelbooking.modules.models;
 
-import com.hotelbooking.hotelbooking.models.Admin;
-import com.hotelbooking.hotelbooking.models.Role;
-import com.hotelbooking.hotelbooking.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

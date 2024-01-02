@@ -1,6 +1,6 @@
-package com.hotelbooking.hotelbooking.repositories;
+package com.hotelbooking.hotelbooking.modules.repositories;
 
-import com.hotelbooking.hotelbooking.models.Receptionist;
+import com.hotelbooking.hotelbooking.modules.models.Receptionist;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

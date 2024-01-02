@@ -1,10 +1,9 @@
-package com.hotelbooking.hotelbooking.controllers;
+package com.hotelbooking.hotelbooking.modules.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.UserDTO;
+import com.hotelbooking.hotelbooking.modules.models.Server;
+import com.hotelbooking.hotelbooking.modules.models.UserDTO;
 import com.hotelbooking.hotelbooking.exception.UserNotFoundException;
-import com.hotelbooking.hotelbooking.models.Receptionist;
-import com.hotelbooking.hotelbooking.models.Server;
-import com.hotelbooking.hotelbooking.services.ServerService;
+import com.hotelbooking.hotelbooking.modules.services.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

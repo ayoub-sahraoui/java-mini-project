@@ -1,7 +1,6 @@
-package com.hotelbooking.hotelbooking.repositories;
+package com.hotelbooking.hotelbooking.modules.repositories;
 
-import com.hotelbooking.hotelbooking.models.HouseKeeper;
-import com.hotelbooking.hotelbooking.models.Receptionist;
+import com.hotelbooking.hotelbooking.modules.models.HouseKeeper;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
