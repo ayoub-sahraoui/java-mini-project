@@ -18,21 +18,14 @@ public class RoomKeyDTO {
     private Date issuedAt;
     private boolean active;
     private boolean isMaster;
-    private RoomDTO room;
 
     public static RoomKeyDTO toDTO(RoomKey roomKey) {
-        RoomKeyDTO roomKeyDTO = RoomKeyDTO.builder()
+        return RoomKeyDTO.builder()
                 .keyId(roomKey.getKeyId())
                 .barcode(roomKey.getBarcode())
                 .issuedAt(roomKey.getIssuedAt())
                 .active(roomKey.isActive())
                 .isMaster(roomKey.isMaster())
                 .build();
-
-        if (roomKey.getRoom() != null) {
-            roomKeyDTO.setRoom(RoomDTO.toDTO(roomKey.getRoom()));
-        }
-
-        return roomKeyDTO;
     }
 }
