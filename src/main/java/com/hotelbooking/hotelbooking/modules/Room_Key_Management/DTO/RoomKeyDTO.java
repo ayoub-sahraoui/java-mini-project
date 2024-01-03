@@ -1,6 +1,6 @@
-package com.hotelbooking.hotelbooking.DTO;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO;
 
-import com.hotelbooking.hotelbooking.models.RoomKey;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomKey;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +18,7 @@ public class RoomKeyDTO {
     private Date issuedAt;
     private boolean active;
     private boolean isMaster;
+    private Long roomId;
 
     public static RoomKeyDTO toDTO(RoomKey roomKey) {
         return RoomKeyDTO.builder()
@@ -26,6 +27,7 @@ public class RoomKeyDTO {
                 .issuedAt(roomKey.getIssuedAt())
                 .active(roomKey.isActive())
                 .isMaster(roomKey.isMaster())
+                .roomId(roomKey.getRoom().getId())
                 .build();
     }
 }

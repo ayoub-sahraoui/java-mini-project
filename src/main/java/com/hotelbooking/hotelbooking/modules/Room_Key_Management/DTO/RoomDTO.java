@@ -1,8 +1,8 @@
-package com.hotelbooking.hotelbooking.DTO;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO;
 
-import com.hotelbooking.hotelbooking.models.Room;
-import com.hotelbooking.hotelbooking.models.RoomStatus;
-import com.hotelbooking.hotelbooking.models.RoomStyle;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.Room;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomStatus;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomStyle;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

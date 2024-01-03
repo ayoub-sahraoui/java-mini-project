@@ -1,7 +1,7 @@
-package com.hotelbooking.hotelbooking.repositories;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.repositories;
 
-import com.hotelbooking.hotelbooking.models.Room;
-import com.hotelbooking.hotelbooking.models.RoomStatus;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.Room;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

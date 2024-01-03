@@ -1,11 +1,12 @@
-package com.hotelbooking.hotelbooking.services;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.services;
 
-import com.hotelbooking.hotelbooking.DTO.RoomKeyDTO;
-import com.hotelbooking.hotelbooking.models.RoomKey;
-import com.hotelbooking.hotelbooking.repositories.RoomKeyRepository;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO.RoomKeyDTO;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.Room;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomKey;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.repositories.RoomKeyRepository;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,10 +15,12 @@ import java.util.stream.Collectors;
 public class RoomKeyService {
 
     private final RoomKeyRepository roomKeyRepository;
+    private final RoomRepository roomRepository;
 
     @Autowired
-    public RoomKeyService(RoomKeyRepository roomKeyRepository) {
+    public RoomKeyService(RoomKeyRepository roomKeyRepository, RoomRepository roomRepository) {
         this.roomKeyRepository = roomKeyRepository;
+        this.roomRepository = roomRepository;
     }
 
     public List<RoomKeyDTO> getAllRoomKeys() {
@@ -35,17 +38,24 @@ public class RoomKeyService {
         }
     }
 
+    public RoomKeyDTO createRoomKey(RoomKeyDTO roomKeyDTO, Long roomId) {
+        Optional<Room> optionalRoom = roomRepository.findById(roomId);
+        if (optionalRoom.isPresent()) {
+            RoomKey roomKey = new RoomKey();
 
-    public RoomKeyDTO createRoomKey(RoomKeyDTO roomKeyDTO) {
-        RoomKey roomKey = new RoomKey();
+            roomKey.setBarcode(roomKeyDTO.getBarcode());
+            roomKey.setIssuedAt(roomKeyDTO.getIssuedAt());
+            roomKey.setActive(roomKeyDTO.isActive());
+            roomKey.setMaster(roomKeyDTO.isMaster());
 
-        roomKey.setBarcode(roomKeyDTO.getBarcode());
-        roomKey.setIssuedAt(roomKeyDTO.getIssuedAt());
-        roomKey.setActive(roomKeyDTO.isActive());
-        roomKey.setMaster(roomKeyDTO.isMaster());
+            Room room = optionalRoom.get();
+            roomKey.setRoom(room);
 
-        RoomKey savedRoomKey = roomKeyRepository.save(roomKey);
-        return RoomKeyDTO.toDTO(savedRoomKey);
+            RoomKey savedRoomKey = roomKeyRepository.save(roomKey);
+            return RoomKeyDTO.toDTO(savedRoomKey);
+        } else {
+            throw new RuntimeException("Room not found with ID: " + roomId);
+        }
     }
 
     public RoomKeyDTO updateRoomKey(int id, RoomKeyDTO roomKeyDTO) {
@@ -61,7 +71,6 @@ public class RoomKeyService {
             RoomKey updatedRoomKey = roomKeyRepository.save(existingRoomKey);
             return RoomKeyDTO.toDTO(updatedRoomKey);
         } else {
-
             throw new RuntimeException("Room key not found with ID: " + id);
         }
     }
@@ -72,7 +81,6 @@ public class RoomKeyService {
             RoomKey roomKey = roomKeyOptional.get();
             roomKeyRepository.delete(roomKey);
         } else {
-
             throw new RuntimeException("Room key not found with ID: " + id);
         }
     }

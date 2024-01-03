@@ -1,7 +1,7 @@
-package com.hotelbooking.hotelbooking.controllers;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.RoomDTO;
-import com.hotelbooking.hotelbooking.services.RoomService;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO.RoomDTO;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

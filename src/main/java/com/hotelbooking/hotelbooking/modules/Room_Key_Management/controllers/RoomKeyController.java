@@ -1,7 +1,7 @@
-package com.hotelbooking.hotelbooking.controllers;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.controllers;
 
-import com.hotelbooking.hotelbooking.DTO.RoomKeyDTO;
-import com.hotelbooking.hotelbooking.services.RoomKeyService;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO.RoomKeyDTO;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.services.RoomKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +26,15 @@ public class RoomKeyController {
         return ResponseEntity.ok(roomKeys);
     }
 
-    @GetMapping("/roomKey/{id}")
+    @GetMapping("/RoomKey/{id}")
     public ResponseEntity<RoomKeyDTO> getRoomKeyById(@PathVariable int id) {
         RoomKeyDTO roomKeyDTO = roomKeyService.getRoomKeyById(id);
         return ResponseEntity.ok(roomKeyDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<RoomKeyDTO> createRoomKey(@RequestBody RoomKeyDTO roomKeyDTO) {
-        RoomKeyDTO createdRoomKey = roomKeyService.createRoomKey(roomKeyDTO);
+    @PostMapping("/{roomId}")
+    public ResponseEntity<RoomKeyDTO> createRoomKey(@RequestBody RoomKeyDTO roomKeyDTO, @PathVariable Long roomId) {
+        RoomKeyDTO createdRoomKey = roomKeyService.createRoomKey(roomKeyDTO, roomId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRoomKey);
     }
 

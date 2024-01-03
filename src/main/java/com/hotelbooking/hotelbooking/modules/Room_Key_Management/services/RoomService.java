@@ -1,9 +1,11 @@
-package com.hotelbooking.hotelbooking.services;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.services;
 
-import com.hotelbooking.hotelbooking.DTO.RoomDTO;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.DTO.RoomDTO;
 import com.hotelbooking.hotelbooking.exception.RoomNotFoundException;
-import com.hotelbooking.hotelbooking.models.Room;
-import com.hotelbooking.hotelbooking.repositories.RoomRepository;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.Room;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.models.RoomKey;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.repositories.RoomRepository;
+import com.hotelbooking.hotelbooking.modules.Room_Key_Management.repositories.RoomKeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class RoomService {
 
+    private final RoomKeyRepository roomKeyRepository;
     private final RoomRepository roomRepository;
 
     @Autowired
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(RoomKeyRepository roomKeyRepository, RoomRepository roomRepository) {
+        this.roomKeyRepository = roomKeyRepository;
         this.roomRepository = roomRepository;
     }
 
@@ -49,9 +53,14 @@ public class RoomService {
         return RoomDTO.toDTO(updatedRoom);
     }
 
-    public void deleteRoom(Long id) {
-        Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new RoomNotFoundException("Room with ID " + id + " not found"));
+    public void deleteRoom(Long roomId) {
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found with ID: " + roomId));
+
+        List<RoomKey> roomKeys = room.getRoomKeys();
+
+        roomKeyRepository.deleteAll(roomKeys);
+
         roomRepository.delete(room);
     }
 

@@ -1,14 +1,11 @@
-package com.hotelbooking.hotelbooking.models;
+package com.hotelbooking.hotelbooking.modules.Room_Key_Management.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.hotelbooking.hotelbooking.repositories.RoomRepository;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Optional;
+import java.util.List;
+
 
 @Data
 @Builder
@@ -27,15 +24,12 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private RoomStatus status;
     private double bookingPrice;
-    private boolean isSmoking;
+    @Getter
+    @Setter
+    private boolean Smoking;
 
-    public Room(int roomNumber, RoomStyle style, RoomStatus status, double bookingPrice, boolean isSmoking) {
-        this.roomNumber = roomNumber;
-        this.style = style;
-        this.status = status;
-        this.bookingPrice = bookingPrice;
-        this.isSmoking = isSmoking;
-    }
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<RoomKey> roomKeys;
 
     public boolean isRoomAvailable() {
         return status == RoomStatus.AVAILABLE;
