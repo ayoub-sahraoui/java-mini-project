@@ -1,0 +1,5 @@
+[Use Case.pdf](https://github.com/ayoub-sahraoui/java-mini-project/files/13854993/Use.Case.pdf)
+[Class digram.pdf](https://github.com/ayoub-sahraoui/java-mini-project/files/13854994/Class.digram.pdf)
+[Activity1.pdf](https://github.com/ayoub-sahraoui/java-mini-project/files/13854995/Activity1.pdf)
+[Activity2.pdf](https://github.com/ayoub-sahraoui/java-mini-project/files/13854996/Activity2.pdf)
+[Activity3.pdf](https://github.com/ayoub-sahraoui/java-mini-project/files/13854997/Activity3.pdf)
