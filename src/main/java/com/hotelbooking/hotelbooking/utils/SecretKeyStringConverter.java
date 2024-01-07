@@ -18,10 +18,5 @@ public class SecretKeyStringConverter {
         byte[] decodedKey = Base64.getDecoder().decode(secretKeyString);
         return new SecretKeySpec(decodedKey, 0, decodedKey.length, algorithm);
     }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        SecretKey key = Jwts.SIG.HS256.key().build();
-        System.out.println(secretKeyToString(key));
-    }
 }
 
